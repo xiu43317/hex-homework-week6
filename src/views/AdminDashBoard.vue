@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="h3 text-center">這是後台介面</div>
+  <div class="h1 text-center">這是後台介面</div>
   <div class="text-center">
     <router-link to="/">回到前台</router-link> |
     <router-link to="/admin/products">後台產品列表</router-link> |
@@ -11,10 +11,7 @@
 </div>
 </template>
 <script>
-import axios from 'axios'
 const url = import.meta.env.VITE_APP_API_URL
-const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
-axios.defaults.headers.common.Authorization = token
 export default {
   data () {
     return {
@@ -23,7 +20,9 @@ export default {
   },
   methods: {
     checkLogin () {
-      axios
+      const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
+      this.$http.defaults.headers.common.Authorization = token
+      this.$http
         .post(`${url}/api/user/check`)
         .then((res) => {
           this.checkSuccess = true

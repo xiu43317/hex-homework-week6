@@ -151,7 +151,7 @@ export default {
     }
   },
   mounted () {
-    this.checkLogin()
+    this.getProducts()
     this.editModal = this.$refs.productModal
     this.delModel = this.$refs.delProductModal
   },

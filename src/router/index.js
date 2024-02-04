@@ -7,7 +7,7 @@ const routes = [
     component: () => import('../views/UserLayout.vue'),
     children: [
       {
-        path: '',
+        path: '/',
         component: () => import('../views/HomeView.vue')
       },
       {
@@ -21,7 +21,7 @@ const routes = [
         component: () => import('../views/UserCart.vue')
       },
       {
-        path: 'products/:id',
+        path: 'detail/:id',
         name: '產品細節',
         component: () => import('../views/UserProductDetail.vue')
       }
