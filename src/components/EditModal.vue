@@ -340,8 +340,7 @@ export default {
     // this.product = { ...this.tempProduct }
     // this.new = this.isNew
     this.myModal = new Modal(this.$refs.Modal, {
-      keyboard: false,
-      backdrop: 'static'
+      keyboard: false
     })
     // this.fileInput = this.$refs.formFile
     // this.fileInput.addEventListener('change', this.uploadFile)
