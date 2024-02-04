@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="h1 text-center">這是後台介面</div>
+  <div class="h1 text-center mt-5">這是後台介面</div>
   <div class="text-center">
     <router-link to="/">回到前台</router-link> |
     <router-link to="/admin/products">後台產品列表</router-link> |

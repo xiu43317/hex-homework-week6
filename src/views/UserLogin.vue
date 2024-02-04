@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
+  <div class="row align-items-center vh-100">
+    <div class="text-center">
       <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
-      <div class="col-8">
+      <div>
         <form class="form-signin" @submit.prevent="login">
           <div class="form-floating mb-3">
             <input
@@ -36,23 +36,11 @@
           </button>
         </form>
       </div>
+      <p class="mt-5 mb-3 text-muted">&copy; 2023~∞ - 六角學院</p>
     </div>
-    <p class="mt-5 mb-3 text-muted">&copy; 2023~∞ - 六角學院</p>
   </div>
 </template>
 <style>
-html,
-body {
-  height: 100%;
-  text-align: center;
-}
-
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .form-signin {
   width: 100%;
   max-width: 330px;
