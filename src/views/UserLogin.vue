@@ -1,4 +1,5 @@
 <template>
+<div class="container">
   <div class="row align-items-center vh-100">
     <div class="text-center">
       <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
@@ -37,10 +38,12 @@
         </form>
       </div>
       <p class="mt-5 mb-3 text-muted">&copy; 2023~∞ - 六角學院</p>
+      <router-link to="/">返回首頁</router-link>
     </div>
   </div>
+</div>
 </template>
-<style>
+<style scoped>
 .form-signin {
   width: 100%;
   max-width: 330px;
