@@ -42,6 +42,7 @@
                     class="form-control"
                     min="1"
                     v-model="qty"
+                    :disabled="isLoading"
                   />
                   <button
                     type="button"
