@@ -1,0 +1,1 @@
+import{_ as e,o as s,c as r,t as o}from"./index-gRDrp-ce.js";const c={data(){return{id:this.$route.params.id}}},a={class:"h3 mt-3 text-center"};function n(i,_,d,p,t,l){return s(),r("div",a,"這是產品ID："+o(t.id),1)}const f=e(c,[["render",n]]);export{f as default};
