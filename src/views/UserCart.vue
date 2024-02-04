@@ -289,7 +289,7 @@ export default {
         })
     },
     goToProductDetail (item) {
-      this.$router.push(`/products/${item}`)
+      this.$router.push(`/detail/${item}`)
     }
   },
   mounted () {
