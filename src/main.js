@@ -7,6 +7,7 @@ import { LoadingPlugin, Component } from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
 import { localize, setLocale } from '@vee-validate/i18n'
@@ -25,7 +26,7 @@ configure({
 
 setLocale('zh_TW')
 
-library.add(fas)
+library.add(fas, far)
 
 const app = createApp(App)
 app.config.productionTip = false

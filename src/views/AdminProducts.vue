@@ -26,10 +26,10 @@
           <td>
             <span v-for="(star, index) in 5" :key="index">
               <span v-if="index + 1 <= item.stars">
-                <i class="bi bi-star-fill"></i>
+                <font-awesome-icon icon="fas fa-star"/>
               </span>
               <span v-else>
-                <i class="bi bi-star"></i>
+                <i class="far fa-star"></i>
               </span>
             </span>
           </td>

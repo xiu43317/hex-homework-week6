@@ -205,13 +205,13 @@
                       href="#"
                       v-for="(item, key) in 5"
                       :key="key"
-                      @click="product.stars = key + 1"
+                      @click.prevent="product.stars = key + 1"
                     >
                       <span v-if="key + 1 <= tempProduct.stars">
-                        <i class="bi bi-star-fill"></i>
+                        <font-awesome-icon :icon="['fas', 'star']" />
                       </span>
                       <span v-else>
-                        <i class="bi bi-star"></i>
+                        <font-awesome-icon :icon="['far', 'star']" />
                       </span>
                     </a>
                   </div>
