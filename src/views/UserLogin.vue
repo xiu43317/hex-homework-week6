@@ -87,7 +87,7 @@ export default {
         document.cookie = `hexToken=${token};expires=${new Date(expired)};`
         alert(res.data.message)
         // console.log(res)
-        location.href = './products.html'
+        this.$router.push('/admin/products')
       }).catch((error) => {
         // console.dir(error)
         alert(error.response.data.message)
