@@ -103,28 +103,28 @@ export default {
   },
   methods: {
     checkLogin () {
-      this.isLoading = true
       this.$http
         .post(`${url}/api/user/check`)
         .then((_res) => {
           this.getProducts()
-          this.isLoading = false
         })
         .catch((_error) => {
           this.$router.push('/login')
-          this.isLoading = false
         })
     },
     getProducts (page = 1) {
+      this.isLoading = true
       this.$http
         .get(`${url}/api/${path}/admin/products?page=${page}`)
         .then((res) => {
           // console.log(res.data.products);
           this.products = res.data.products
           this.pagination = res.data.pagination
+          this.isLoading = false
         })
         .catch((error) => {
           console.dir(error)
+          this.isLoading = false
         })
     },
     openModal (status, item = {}) {
