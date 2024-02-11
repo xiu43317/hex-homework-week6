@@ -38,7 +38,7 @@
             <td><a href="#" @click.prevent="goToProductDetail(item.product.id)">
               {{ item.product.title }}
               </a>
-              <div class="text-success" v-show="isDiscount">已套用優惠券</div>
+              <div class="text-success" v-show="item.final_total !== item.total">已套用優惠券</div>
             </td>
             <td>
               <div class="input-group input-group-sm">
@@ -58,23 +58,39 @@
               </div>
             </td>
             <td class="text-end">
-              <small class="text-success" v-show="isDiscount">折扣價：</small>
-              {{ item.final_total }}
+              <small class="text-success" v-show="item.final_total !== item.total">折扣價：</small>
+              <span :class="{'text-success':item.final_total !== item.total}">{{ item.final_total }}</span>
             </td>
           </tr>
         </template>
       </tbody>
       <tfoot>
-        <tr v-show="!isDiscount">
+        <tr>
           <td colspan="3" class="text-end">總計</td>
-          <td class="text-end">{{ cart.final_total }}</td>
+          <td class="text-end">{{ cart.total }}</td>
         </tr>
-        <tr v-show="isDiscount">
+        <tr v-show="cart.total !== cart.final_total">
           <td colspan="3" class="text-end text-success">折扣價</td>
           <td class="text-end text-success">{{ cart.final_total }}</td>
         </tr>
       </tfoot>
     </table>
+    <div class="row">
+      <div class="col-4 ms-auto">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="請輸入折扣碼" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="couponCode">
+          <button class="btn btn-outline-primary" type="button"
+           :disabled="isDiscount"
+           id="button-addon2" @click="sendCouponCode()">
+          <font-awesome-icon
+            icon="spinner"
+            class="fa-spin"
+            v-show="isDiscount"
+          />
+            送出折扣碼</button>
+        </div>
+      </div>
+    </div>
     <div class="my-5 row justify-content-center">
       <v-form
         @submit="onSubmit"
@@ -171,6 +187,7 @@ export default {
         address: '',
         tel: ''
       },
+      couponCode: '',
       message: '',
       cart: [],
       products: [],
@@ -226,8 +243,8 @@ export default {
           // console.log(this.cart)
         })
         .catch((err) => {
-          // console.dir(err);
-          alert(err.data.message)
+          console.dir(err)
+          // alert(err.data.message)
           this.isLoading = false
         })
     },
@@ -290,6 +307,24 @@ export default {
     },
     goToProductDetail (item) {
       this.$router.push(`/detail/${item}`)
+    },
+    sendCouponCode () {
+      this.isDiscount = true
+      const couponCode = {
+        code: this.couponCode
+      }
+      this.$http.post(`${url}/api/${path}/coupon`, { data: couponCode })
+        .then((res) => {
+          // console.log(res)
+          alert(res.data.message)
+          this.getCart()
+          this.isDiscount = false
+        })
+        .catch((err) => {
+          // console.log(err)
+          alert(err.response.data.message)
+          this.isDiscount = false
+        })
     }
   },
   mounted () {

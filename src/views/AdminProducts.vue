@@ -82,7 +82,7 @@
   </div>
 </template>
 <script>
-import editProduct from '../components/EditModal.vue'
+import editProduct from '../components/Editmodal.vue'
 import deleteProduct from '../components/DeleteModal.vue'
 import adminPagination from '../components/AdminPagination.vue'
 const url = import.meta.env.VITE_APP_API_URL

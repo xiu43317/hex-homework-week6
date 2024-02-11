@@ -102,52 +102,88 @@ export default {
           this.isLoading = false
         })
     },
-    updateCart (item, qty) {
-      this.$http
-        .post(`${url}/api/${path}/cart`, {
+    updateCart (item, qty, renew) {
+      if (renew === true) {
+        // console.log('renew')
+        this.$http.put(`${url}/api/${path}/cart/${item.id}`, {
           data: {
-            product_id: item.id,
+            product_id: item.product_id,
             qty
           }
         })
-        .then((res) => {
+          .then((res) => {
+            this.$refs.userProductModal.isLoading = false
+            this.products.filter((item) => {
+              return (item.isLoading = false)
+            })
+            alert(item.product.title + res.data.message)
+            this.$refs.userProductModal.closeModal()
+            this.getCart()
+          }).catch((err) => {
+            alert(err.message)
+            this.$refs.userProductModal.isLoading = false
+            this.products.filter((item) => {
+              return (item.isLoading = false)
+            })
+          })
+      } else {
+        // console.log('add')
+        this.$http
+          .post(`${url}/api/${path}/cart`, {
+            data: {
+              product_id: item.id,
+              qty
+            }
+          })
+          .then((res) => {
           // console.log(res.data.message);
-          this.$refs.userProductModal.isLoading = false
-          this.products.filter((item) => {
-            return (item.isLoading = false)
+            this.$refs.userProductModal.isLoading = false
+            this.products.filter((item) => {
+              return (item.isLoading = false)
+            })
+            alert(item.title + res.data.message)
+            // console.log(this.products);
+            this.$refs.userProductModal.closeModal()
+            this.getCart()
           })
-          alert(item.title + res.data.message)
-          // console.log(this.products);
-          this.$refs.userProductModal.closeModal()
-          this.getCart()
-        })
-        .catch((err) => {
+          .catch((err) => {
           // console.log(err);
-          alert(err.message)
-          this.$refs.userProductModal.isLoading = false
-          this.products.filter((item) => {
-            return (item.isLoading = false)
+            alert(err.message)
+            this.$refs.userProductModal.isLoading = false
+            this.products.filter((item) => {
+              return (item.isLoading = false)
+            })
           })
-        })
+      }
     },
     addToCart (product, qty = 0) {
+      let renew = false
       qty === 0
         ? (product.isLoading = true)
         : (this.$refs.userProductModal.isLoading = true)
-      const index = this.cart.carts.findIndex((item) => item.id === product.id)
+      const index = this.cart.carts.findIndex((item) => item.product_id === product.id)
       // 購物車有這項目
       if (index !== -1 && qty !== 0) {
-        this.updateCart(product, qty)
+        renew = true
+        // console.log('exist')
+        const totalQty = this.cart.carts[index].qty += qty
+        this.updateCart(this.cart.carts[index], totalQty, renew)
         // 表格上面的項目且購物車裡面有項目
       } else if (index !== -1 && qty === 0) {
-        const totalQty = (this.cart[index].qty += 1)
-        this.updateCart(product, totalQty)
+        renew = true
+        // console.log('exist')
+        const totalQty = (this.cart.carts[index].qty += 1)
+        this.updateCart(this.cart.carts[index], totalQty, renew)
         // 表格上面的項目且購物車沒有這項目
       } else if (index === -1 && qty === 0) {
-        this.updateCart(product, 1)
+        renew = false
+        // console.log('non exist')
+        this.updateCart(product, 1, renew)
         // 購物車沒有這項目
       } else {
-        this.updateCart(product, qty)
+        renew = false
+        // console.log('non exist')
+        this.updateCart(product, qty, renew)
       }
     },
     getCart () {

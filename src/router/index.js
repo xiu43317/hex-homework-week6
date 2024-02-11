@@ -46,6 +46,11 @@ const routes = [
         path: 'orders',
         name: '客戶訂單',
         component: () => import('../views/AdminOrder.vue')
+      },
+      {
+        path: 'coupons',
+        name: '優惠卷',
+        component: () => import('../views/AdminCoupon.vue')
       }
     ]
   },

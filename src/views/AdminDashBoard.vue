@@ -4,6 +4,7 @@
   <div class="text-center">
     <router-link to="/">回到前台</router-link> |
     <router-link to="/admin/products">後台產品列表</router-link> |
+    <router-link to="/admin/coupons">優惠卷</router-link> |
     <router-link to="/admin/orders">後台訂單</router-link> |
     <a href="#" @click.prevent="signOut">登出</a>
   </div>
